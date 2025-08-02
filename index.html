@@ -75,53 +75,68 @@ function calculatePenalty() {
   const checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
   let totalFine = 0;
   let totalJail = 0;
+  let totalPoints = 0;
   let list = [];
 
   checkboxes.forEach(cb => {
     const fine = parseInt(cb.getAttribute('data-fine')) || 0;
     const jail = parseInt(cb.getAttribute('data-jail')) || 0;
+    const points = parseInt(cb.getAttribute('data-points')) || 0;
     totalFine += fine;
     totalJail += jail;
+    totalPoints += points;
     list.push(cb.value);
   });
 
-  const summary = `Wyrok RP:\n\n${list.join('\n')}\n\nŁączna grzywna: ${totalFine} zł\nŁączne więzienie: ${totalJail} miesięcy`;
+  const summary = `Wyrok:\n\n${list.join('\n')}\n\nŁączna grzywna: ${totalFine} zł\nŁączne więzienie: ${totalJail} miesięcy\nŁączna liczba punktów karnych: ${totalPoints}`;
   document.getElementById('result').innerText = summary;
 }
 </script>
 <div class="section">
   <h2>1. Wykroczenia drogowe</h2>
-  <label><input type="checkbox" value="Przekroczenie prędkości (21–30 km/h) – 300 zł, 0 miesięcy" data-fine="300" data-jail="0"> Przekroczenie prędkości (21–30 km/h)</label>
-  <label><input type="checkbox" value="Przekroczenie prędkości (31–50 km/h) – 500 zł, 0 miesięcy" data-fine="500" data-jail="0"> Przekroczenie prędkości (31–50 km/h)</label>
-  <label><input type="checkbox" value="Przejazd na czerwonym świetle – 500 zł, 0 miesięcy" data-fine="500" data-jail="0"> Przejazd na czerwonym świetle</label>
-  <label><input type="checkbox" value="Niezatrzymanie się przed znakiem STOP – 300 zł, 0 miesięcy" data-fine="300" data-jail="0"> Niezatrzymanie się przed znakiem STOP</label>
-  <label><input type="checkbox" value="Nieprawidłowe parkowanie – 250 zł, 0 miesięcy" data-fine="250" data-jail="0"> Nieprawidłowe parkowanie</label>
-  <label><input type="checkbox" value="Brak pasów bezpieczeństwa – 150 zł, 0 miesięcy" data-fine="150" data-jail="0"> Brak pasów bezpieczeństwa</label>
-  <label><input type="checkbox" value="Rozmowa przez telefon podczas jazdy – 200 zł, 0 miesięcy" data-fine="200" data-jail="0"> Rozmowa przez telefon podczas jazdy</label>
-  <label><input type="checkbox" value="Jazda bez świateł – 100 zł, 0 miesięcy" data-fine="100" data-jail="0"> Jazda bez świateł</label>
-  <label><input type="checkbox" value="Brak ważnego przeglądu technicznego – 300 zł, 0 miesięcy" data-fine="300" data-jail="0"> Brak ważnego przeglądu technicznego</label>
-  <label><input type="checkbox" value="Brak OC – 500 zł, 0 miesięcy" data-fine="500" data-jail="0"> Brak OC</label>
-  <label><input type="checkbox" value="Zatrzymanie na zakazie – 150 zł, 0 miesięcy" data-fine="150" data-jail="0"> Zatrzymanie na zakazie</label>
-  <label><input type="checkbox" value="Wyprzedzanie na przejściu – 400 zł, 0 miesięcy" data-fine="400" data-jail="0"> Wyprzedzanie na przejściu</label>
-  <label><input type="checkbox" value="Nieustąpienie pierwszeństwa – 350 zł, 0 miesięcy" data-fine="350" data-jail="0"> Nieustąpienie pierwszeństwa</label>
-  <label><input type="checkbox" value="Brak kasku na motocyklu – 250 zł, 0 miesięcy" data-fine="250" data-jail="0"> Brak kasku na motocyklu</label>
-  <label><input type="checkbox" value="Nieprawidłowe cofanie – 300 zł, 0 miesięcy" data-fine="300" data-jail="0"> Nieprawidłowe cofanie</label>
-  <label><input type="checkbox" value="Nadmierny hałas pojazdu – 150 zł, 0 miesięcy" data-fine="150" data-jail="0"> Nadmierny hałas pojazdu</label>
-  <label><input type="checkbox" value="Jazda pod prąd – 400 zł, 0 miesięcy" data-fine="400" data-jail="0"> Jazda pod prąd</label>
-  <label><input type="checkbox" value="Przewożenie dziecka bez fotelika – 300 zł, 0 miesięcy" data-fine="300" data-jail="0"> Przewożenie dziecka bez fotelika</label>
-  <label><input type="checkbox" value="Zawracanie na autostradzie – 1000 zł, 1 miesiąc" data-fine="1000" data-jail="1"> Zawracanie na autostradzie</label>
-  <label><input type="checkbox" value="Niezatrzymanie się do kontroli – 1500 zł, 2 miesiące" data-fine="1500" data-jail="2"> Niezatrzymanie się do kontroli</label>
-  <label><input type="checkbox" value="Jazda bez prawa jazdy – 1000 zł, 1 miesiąc" data-fine="1000" data-jail="1"> Jazda bez prawa jazdy</label>
-  <label><input type="checkbox" value="Brak dokumentów pojazdu – 200 zł, 0 miesięcy" data-fine="200" data-jail="0"> Brak dokumentów pojazdu</label>
-  <label><input type="checkbox" value="Nieczytelna tablica rejestracyjna – 100 zł, 0 miesięcy" data-fine="100" data-jail="0"> Nieczytelna tablica rejestracyjna</label>
-  <label><input type="checkbox" value="Nieodśnieżony pojazd zimą – 150 zł, 0 miesięcy" data-fine="150" data-jail="0"> Nieodśnieżony pojazd zimą</label>
-  <label><input type="checkbox" value="Wjazd na torowisko przy zaporach – 600 zł, 1 miesiąc" data-fine="600" data-jail="1"> Wjazd na torowisko przy zaporach</label>
-  <label><input type="checkbox" value="Zanieczyszczanie drogi – 200 zł, 0 miesięcy" data-fine="200" data-jail="0"> Zanieczyszczanie drogi</label>
-  <label><input type="checkbox" value="Nieprawidłowe oświetlenie pojazdu – 200 zł, 0 miesięcy" data-fine="200" data-jail="0"> Nieprawidłowe oświetlenie pojazdu</label>
-  <label><input type="checkbox" value="Jazda bez butów ochronnych (motocykl) – 150 zł, 0 miesięcy" data-fine="150" data-jail="0"> Jazda bez butów ochronnych (motocykl)</label>
-  <label><input type="checkbox" value="Wyprzedzanie na podwójnej ciągłej – 800 zł, 1 miesiąc" data-fine="800" data-jail="1"> Wyprzedzanie na podwójnej ciągłej</label>
-  <label><input type="checkbox" value="Nieuzasadnione użycie klaksonu – 100 zł, 0 miesięcy" data-fine="100" data-jail="0"> Nieuzasadnione użycie klaksonu</label>
-</div>
+<h2>Przekroczenie prędkości</h2>
+<label><input type="checkbox" value="Przekroczenie prędkości (5–10 km/h) – 50 zł, 0 pkt, 0 mies." data-fine="50" data-jail="0" data-points="0"> Przekroczenie prędkości (5–10 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (11–15 km/h) – 100 zł, 2 pkt, 0 mies." data-fine="100" data-jail="0" data-points="2"> Przekroczenie prędkości (11–15 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (16–20 km/h) – 200 zł, 4 pkt, 0 mies." data-fine="200" data-jail="0" data-points="4"> Przekroczenie prędkości (16–20 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (21–30 km/h) – 300 zł, 6 pkt, 0 mies." data-fine="300" data-jail="0" data-points="6"> Przekroczenie prędkości (21–30 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (31–40 km/h) – 400 zł, 8 pkt, 0 mies." data-fine="400" data-jail="0" data-points="8"> Przekroczenie prędkości (31–40 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (41–50 km/h) – 500 zł, 10 pkt, 1 mies." data-fine="500" data-jail="1" data-points="10"> Przekroczenie prędkości (41–50 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (51–60 km/h) – 700 zł, 10 pkt, 1 mies." data-fine="700" data-jail="1" data-points="10"> Przekroczenie prędkości (51–60 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (61–70 km/h) – 1000 zł, 10 pkt, 2 mies." data-fine="1000" data-jail="2" data-points="10"> Przekroczenie prędkości (61–70 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (71–80 km/h) – 1200 zł, 10 pkt, 2 mies." data-fine="1200" data-jail="2" data-points="10"> Przekroczenie prędkości (71–80 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (81–90 km/h) – 1500 zł, 10 pkt, 3 mies." data-fine="1500" data-jail="3" data-points="10"> Przekroczenie prędkości (81–90 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (91–100 km/h) – 1500 zł, 10 pkt, 3 mies." data-fine="1500" data-jail="3" data-points="10"> Przekroczenie prędkości (91–100 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (101–110 km/h) – 1500 zł, 10 pkt, 4 mies." data-fine="1500" data-jail="4" data-points="10"> Przekroczenie prędkości (101–110 km/h)</label>
+<label><input type="checkbox" value="Przekroczenie prędkości (111–120 km/h) – 1500 zł, 10 pkt, 5 mies." data-fine="1500" data-jail="5" data-points="10"> Przekroczenie prędkości (111–120 km/h)</label>
+<label><input type="checkbox" value="Przejazd na czerwonym świetle – 500 zł, 0 miesięcy, 6 pkt" data-fine="500" data-jail="0" data-points="6"> Przejazd na czerwonym świetle</label>
+<label><input type="checkbox" value="Niezatrzymanie się przed znakiem STOP – 300 zł, 0 miesięcy, 6 pkt" data-fine="300" data-jail="0" data-points="6"> Niezatrzymanie się przed znakiem STOP</label>
+<label><input type="checkbox" value="Nieprawidłowe parkowanie – 250 zł, 0 miesięcy, 2 pkt" data-fine="250" data-jail="0" data-points="2"> Nieprawidłowe parkowanie</label>
+<label><input type="checkbox" value="Brak pasów bezpieczeństwa – 150 zł, 0 miesięcy, 2 pkt" data-fine="150" data-jail="0" data-points="2"> Brak pasów bezpieczeństwa</label>
+<label><input type="checkbox" value="Rozmowa przez telefon podczas jazdy – 200 zł, 0 miesięcy, 5 pkt" data-fine="200" data-jail="0" data-points="5"> Rozmowa przez telefon podczas jazdy</label>
+<label><input type="checkbox" value="Jazda bez świateł – 100 zł, 0 miesięcy, 0 pkt" data-fine="100" data-jail="0" data-points="0"> Jazda bez świateł</label>
+<label><input type="checkbox" value="Brak ważnego przeglądu technicznego – 300 zł, 0 miesięcy, 0 pkt" data-fine="300" data-jail="0" data-points="0"> Brak ważnego przeglądu technicznego</label>
+<label><input type="checkbox" value="Brak OC – 500 zł, 0 miesięcy, 0 pkt" data-fine="500" data-jail="0" data-points="0"> Brak OC</label>
+<label><input type="checkbox" value="Zatrzymanie na zakazie – 150 zł, 0 miesięcy, 2 pkt" data-fine="150" data-jail="0" data-points="2"> Zatrzymanie na zakazie</label>
+<label><input type="checkbox" value="Wyprzedzanie na przejściu – 400 zł, 0 miesięcy, 10 pkt" data-fine="400" data-jail="0" data-points="10"> Wyprzedzanie na przejściu</label>
+<label><input type="checkbox" value="Nieustąpienie pierwszeństwa – 350 zł, 0 miesięcy, 10 pkt" data-fine="350" data-jail="0" data-points="10"> Nieustąpienie pierwszeństwa</label>
+<label><input type="checkbox" value="Brak kasku na motocyklu – 250 zł, 0 miesięcy, 5 pkt" data-fine="250" data-jail="0" data-points="5"> Brak kasku na motocyklu</label>
+<label><input type="checkbox" value="Nieprawidłowe cofanie – 300 zł, 0 miesięcy, 5 pkt" data-fine="300" data-jail="0" data-points="5"> Nieprawidłowe cofanie</label>
+<label><input type="checkbox" value="Nadmierny hałas pojazdu – 150 zł, 0 miesięcy, 0 pkt" data-fine="150" data-jail="0" data-points="0"> Nadmierny hałas pojazdu</label>
+<label><input type="checkbox" value="Jazda pod prąd – 400 zł, 0 miesięcy, 10 pkt" data-fine="400" data-jail="0" data-points="10"> Jazda pod prąd</label>
+<label><input type="checkbox" value="Przewożenie dziecka bez fotelika – 300 zł, 0 miesięcy, 6 pkt" data-fine="300" data-jail="0" data-points="6"> Przewożenie dziecka bez fotelika</label>
+<label><input type="checkbox" value="Zawracanie na autostradzie – 1000 zł, 1 miesiąc, 10 pkt" data-fine="1000" data-jail="1" data-points="10"> Zawracanie na autostradzie</label>
+<label><input type="checkbox" value="Niezatrzymanie się do kontroli – 1500 zł, 2 miesiące, 10 pkt" data-fine="1500" data-jail="2" data-points="10"> Niezatrzymanie się do kontroli</label>
+<label><input type="checkbox" value="Jazda bez prawa jazdy – 1000 zł, 1 miesiąc, 10 pkt" data-fine="1000" data-jail="1" data-points="10"> Jazda bez prawa jazdy</label>
+<label><input type="checkbox" value="Brak dokumentów pojazdu – 200 zł, 0 miesięcy, 0 pkt" data-fine="200" data-jail="0" data-points="0"> Brak dokumentów pojazdu</label>
+<label><input type="checkbox" value="Nieczytelna tablica rejestracyjna – 100 zł, 0 miesięcy, 0 pkt" data-fine="100" data-jail="0" data-points="0"> Nieczytelna tablica rejestracyjna</label>
+<label><input type="checkbox" value="Nieodśnieżony pojazd zimą – 150 zł, 0 miesięcy, 0 pkt" data-fine="150" data-jail="0" data-points="0"> Nieodśnieżony pojazd zimą</label>
+<label><input type="checkbox" value="Wjazd na torowisko przy zaporach – 600 zł, 1 miesiąc, 10 pkt" data-fine="600" data-jail="1" data-points="10"> Wjazd na torowisko przy zaporach</label>
+<label><input type="checkbox" value="Zanieczyszczanie drogi – 200 zł, 0 miesięcy, 0 pkt" data-fine="200" data-jail="0" data-points="0"> Zanieczyszczanie drogi</label>
+<label><input type="checkbox" value="Nieprawidłowe oświetlenie pojazdu – 200 zł, 0 miesięcy, 0 pkt" data-fine="200" data-jail="0" data-points="0"> Nieprawidłowe oświetlenie pojazdu</label>
+<label><input type="checkbox" value="Jazda bez butów ochronnych (motocykl) – 150 zł, 0 miesięcy, 0 pkt" data-fine="150" data-jail="0" data-points="0"> Jazda bez butów ochronnych (motocykl)</label>
+<label><input type="checkbox" value="Wyprzedzanie na podwójnej ciągłej – 800 zł, 1 miesiąc, 10 pkt" data-fine="800" data-jail="1" data-points="10"> Wyprzedzanie na podwójnej ciągłej</label>
+<label><input type="checkbox" value="Nieuzasadnione użycie klaksonu – 100 zł, 0 miesięcy, 0 pkt" data-fine="100" data-jail="0" data-points="0"> Nieuzasadnione użycie klaksonu</label>
+<label><input type="checkbox" value="Brak tablic rejestracyjnych – 500 zł, 0 miesięcy, 10 pkt" data-fine="500" data-jail="0" data-points="10"> Brak tablic rejestracyjnych</label>
 <div class="section">
   <h2>2. Przestępstwa lekkie</h2>
   <label><input type="checkbox" value="Kradzież sklepową do 500 zł – 600 zł, 1 miesiąc" data-fine="600" data-jail="1"> Kradzież sklepową do 500 zł</label>
